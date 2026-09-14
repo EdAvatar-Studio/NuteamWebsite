@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NUTEAM.ORG — App Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+ :root{
+  --bg:#d7d7d5;
+  --bg-2:#cfcfcd;
+  --bg-3:#e3e3e1;
+
+  --panel:#dcdcd9;
+  --panel-2:#cfcfcb;
+  --panel-3:#ececea;
+
+  --line:#b8b8b4;
+  --line-soft:#d9d9d5;
+
+  --text:#1f1f1c;
+  --muted:#5f5f5a;
+
+  --silver:#d8d8d6;
+  --silver-hi:#f3f3f1;
+  --silver-mid:#c8c8c4;
+  --silver-low:#a9a9a4;
+
+  --gold:#b89a4a;
+  --gold-2:#9b7f39;
+  --gold-soft:#d2b56a;
+
+  --shadow-soft:
+    10px 10px 26px rgba(70,70,70,0.14),
+    -8px -8px 18px rgba(255,255,255,0.58);
+
+  --shadow-card:
+    14px 14px 34px rgba(70,70,70,0.16),
+    -10px -10px 22px rgba(255,255,255,0.62);
+
+  --shadow-inset:
+    inset 2px 2px 5px rgba(255,255,255,0.45),
+    inset -2px -2px 5px rgba(110,110,110,0.10);
+
+  --radius:24px;
+}
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+ body{
+  background:
+    linear-gradient(rgba(255,255,255,0.10), rgba(0,0,0,0.03)),
+    linear-gradient(145deg, #e4e4e2, #cbcbc8);
+  color:var(--text);
+  font-family:'DM Mono',monospace;
+  line-height:1.7;
+  position:relative;
+}
+
+/* texture เบา ๆ */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.16;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.45) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(0,0,0,0.035) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(255,255,255,0.22) 0 1px, transparent 1px);
+  background-size: 18px 18px, 22px 22px, 26px 26px;
+  mix-blend-mode:multiply;
+}
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+    background-size: 96px 96px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+  }
+
+  .rivet {
+    width: 16px; height: 16px;
+    background: radial-gradient(circle at 35% 35%, #c9c1b4, #8d8478);
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.12);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 1px 2px rgba(0,0,0,0.10);
+    flex-shrink: 0;
+  }
+
+ nav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  height:68px;
+  background:
+    linear-gradient(180deg, rgba(246,246,244,0.92), rgba(217,217,214,0.92));
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,0.45);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.55),
+    0 6px 20px rgba(40,40,40,0.08);
+}
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    margin-right: 32px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 0;
+    list-style: none;
+    flex: 1;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0 16px;
+    height: 56px; line-height: 56px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-links a:first-child { border-left: 1px solid rgba(0,0,0,0.05); }
+  .nav-links a:hover { color: var(--ink); background: rgba(255,255,255,0.35); }
+
+  .btn-explore {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 20px;
+    background: var(--gold);
+    color: #171511;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(184,150,62,0.18);
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-explore:hover { background: var(--gold-lt); transform: translateY(-1px); }
+  .btn-explore .arr { font-size: 14px; }
+
+  .nav-corner {
+    width: 32px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 460px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 16px;
+  }
+
+.hero-panel {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.62), rgba(255,255,255,0.18)),
+    linear-gradient(180deg, #f3ede4 0%, #e4dccf 100%);
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 28px;
+  box-shadow:
+    0 20px 40px rgba(31,27,22,0.10),
+    0 6px 14px rgba(31,27,22,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.72),
+    inset 0 -2px 0 rgba(0,0,0,0.04);
+  padding: 40px 42px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 420px;
+  overflow: hidden;
+}
+  .hero-panel::before,
+  .hero-panel::after {
+    content: '';
+    position: absolute;
+    width: 10px; height: 10px;
+    background: radial-gradient(circle at 35% 35%, #c9c1b4, #8d8478);
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.16);
+  }
+
+  .hero-panel::before { top: 10px; left: 10px; }
+  .hero-panel::after  { top: 10px; right: 10px; }
+  
+  .hero-panel-frame {
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 20px;
+  pointer-events: none;
+}
+  
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dk);
+    margin-bottom: 14px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 112px);
+    line-height: 0.92;
+    color: var(--steel-dk);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .hero-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 3vw, 34px);
+    color: var(--steel);
+    letter-spacing: 0.10em;
+    margin-bottom: 22px;
+  }
+
+  .hero-desc {
+    font-size: 12px;
+    line-height: 1.78;
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin-bottom: 30px;
+  }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #171511;
+    border: 1px solid var(--gold);
+    box-shadow: 0 6px 16px rgba(184,150,62,0.18);
+  }
+
+  .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.30);
+    border: 1px solid rgba(0,0,0,0.10);
+    color: var(--ink-soft);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.55);
+    color: var(--ink);
+  }
+
+  .hero-locations {
+    display: flex; gap: 20px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 24px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    flex-wrap: wrap;
+  }
+
+  .section-rule {
+    display: flex; align-items: center; gap: 16px;
+    padding: 0 16px;
+    height: 40px;
+  }
+
+  .section-rule .rivet { width: 12px; height: 12px; }
+  .section-rule-line { flex: 1; height: 1px; background: rgba(0,0,0,0.10); }
+  .section-rule-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    padding: 0 16px 16px;
+  }
+
+  .pillar {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.10)),
+      linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 22px;
+    border-right: 1px solid var(--border);
+    box-shadow: var(--shadow-card), var(--shadow-inset);
+    padding: 28px 24px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    min-height: 220px;
+    display: flex; flex-direction: column;
+  }
+
+  .pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(31,27,22,0.10);
+  }
+
+  .pillar-num {
+    font-size: 10px;
+    color: var(--gold-dk);
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+
+  .pillar-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    color: var(--steel-dk);
+    margin-bottom: 12px;
+  }
+
+  .pillar-desc {
+    font-size: 11px;
+    line-height: 1.68;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+
+  .pillar-arr {
+    margin-top: 16px;
+    color: var(--gold-dk);
+    font-size: 16px;
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .pillar:hover .pillar-arr { transform: translateX(4px); }
+
+  .pillar-icon {
+    position: absolute; right: 16px; top: 20px;
+    width: 58px; height: 58px;
+    background: linear-gradient(180deg, #d8d0c4, #b7aea0);
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    opacity: 0.95;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.38), 0 6px 14px rgba(0,0,0,0.08);
+  }
+
+  #apps {
+    background: transparent;
+  }
+
+  .apps-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 28px 24px 20px;
+  }
+.app-hub {
+  padding: 60px 24px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-hub-inner{
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 56px 40px;
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.50), rgba(255,255,255,0.18)),
+    linear-gradient(145deg, var(--panel), var(--panel-2));
+  border: 1px solid rgba(255,255,255,0.42);
+  box-shadow: var(--shadow-card), var(--shadow-inset);
+}
+
+.app-hub-text{
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-hub-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--gold-dk);
+  margin-bottom: 10px;
+}
+
+.app-hub-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 46px;
+  letter-spacing: 0.12em;
+  color: #1f1b16;
+  margin-bottom: 14px;
+}
+
+.app-hub-desc {
+  font-size: 13px;
+  color: #5c564d;
+  margin-bottom: 26px;
+  line-height: 1.7;
+}
+
+.app-hub-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 30px;
+
+  background: var(--gold);
+  color: #1a1814;
+
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.app-hub-btn:hover {
+  background: var(--gold-lt);
+}
+  .apps-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    color: var(--steel-dk);
+  }
+
+  .apps-subtitle {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-left: 16px;
+  }
+
+  .view-all {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dk);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .view-all:hover { color: var(--gold); }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    padding: 36px 0 0;
+    text-align: left;
+  }
+
+  .app-card {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.10)),
+      linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 22px;
+    box-shadow: var(--shadow-2);
+    padding: 22px 18px;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+
+  .app-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(31,27,22,0.10);
+  }
+
+  .app-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(180deg, #d7cfc3, #bbb1a3);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    color: var(--steel-dk);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.38), 0 6px 14px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .app-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--steel-dk);
+    margin-bottom: 4px;
+  }
+
+  .app-tagline {
+    font-size: 10px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    flex: 1;
+  }
+
+  .app-status {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 999px;
+    width: fit-content;
+  }
+
+  .app-status.active   { color: var(--gold-dk); border-color: rgba(184,150,62,0.35); background: rgba(184,150,62,0.08); }
+  .app-status.testing  { color: #547d95; border-color: rgba(84,125,149,0.25); background: rgba(84,125,149,0.08); }
+  .app-status.working  { color: #5f7b47; border-color: rgba(95,123,71,0.25); background: rgba(95,123,71,0.08); }
+  .app-status.progress { color: var(--steel); border-color: rgba(93,86,77,0.18); background: rgba(93,86,77,0.06); }
+  .app-status.growing  { color: #8c5c45; border-color: rgba(140,92,69,0.22); background: rgba(140,92,69,0.08); }
+  .app-status.future   { color: var(--ink-soft); border-color: rgba(68,64,57,0.16); background: rgba(68,64,57,0.05); }
+
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr 1fr;
+    gap: 18px;
+    padding: 0 16px 16px;
+  }
+
+  .bottom-section {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.10)),
+      linear-gradient(180deg, var(--panel), var(--panel-2));
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 24px;
+    border-right: 1px solid var(--border);
+    box-shadow: var(--shadow-card), var(--shadow-inset);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    min-height: 260px;
+  }
+.ed-focus {
+  border: 1px solid rgba(184,150,62,0.45);
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.25));
+
+  box-shadow:
+    0 30px 60px rgba(184,150,62,0.18),
+    0 10px 20px rgba(31,27,22,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+  .bottom-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dk);
+    margin-bottom: 8px;
+  }
+
+  .bottom-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    color: var(--steel-dk);
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+
+  .bottom-text {
+    font-size: 11px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+
+  .bottom-links { display: flex; flex-direction: column; gap: 10px; }
+
+  .bottom-link {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    cursor: pointer;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: color 0.2s;
+  }
+
+  .bottom-link:hover { color: var(--ink); }
+  .bottom-link .arr2 { color: var(--gold-dk); }
+
+  footer {
+    background: rgba(244,239,231,0.76);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin-top: 8px;
+  }
+
+  .footer-col {
+    padding: 28px 24px;
+    border-right: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .footer-col:last-child { border-right: none; }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    color: var(--steel-dk);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .footer-tagline {
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .footer-copy {
+    font-size: 9px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding-top: 12px;
+    margin-top: 12px;
+  }
+
+  .footer-heading,
+  .footer-stay {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dk);
+    margin-bottom: 14px;
+  }
+
+  .social-row {
+    display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+  }
+
+  .social-link {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .social-link:hover { color: var(--ink); }
+
+  .social-icons { display: flex; gap: 12px; margin-top: 4px; }
+
+  .sicon {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(0,0,0,0.10);
+    background: rgba(255,255,255,0.32);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-soft);
+    font-size: 14px;
+    text-decoration: none; cursor: pointer;
+    border-radius: 10px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .sicon:hover {
+    border-color: rgba(184,150,62,0.26);
+    color: var(--gold-dk);
+    background: rgba(255,255,255,0.52);
+  }
+
+  .footer-stay-sub {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  .email-row {
+    display: flex;
+    margin-top: 16px;
+  }
+
+  .email-input {
+    flex: 1;
+    background: rgba(255,255,255,0.42);
+    border: 1px solid rgba(0,0,0,0.10);
+    border-right: none;
+    color: var(--ink);
+    padding: 9px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    outline: none;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .email-input::placeholder { color: var(--ink-soft); }
+
+  .email-btn {
+    padding: 9px 14px;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: #171511;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 0 10px 10px 0;
+    transition: background 0.2s;
+  }
+
+  .email-btn:hover { background: var(--gold-lt); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-panel > * { animation: fadeUp 0.6s ease both; }
+  .hero-eyebrow   { animation-delay: 0.05s; }
+  .hero-title     { animation-delay: 0.15s; }
+  .hero-sub       { animation-delay: 0.22s; }
+  .hero-desc      { animation-delay: 0.28s; }
+  .hero-actions   { animation-delay: 0.34s; }
+  .hero-locations { animation-delay: 0.40s; }
+
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: #ddd6ca; }
+  ::-webkit-scrollbar-thumb { background: rgba(93,86,77,0.22); border-radius: 4px; }
+
+  @media (max-width: 900px) {
+    .pillars { grid-template-columns: 1fr; }
+    .apps-grid { grid-template-columns: repeat(2, 1fr); }
+    .bottom-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-panel { padding: 28px 24px; }
+    .hero-title { font-size: 68px; }
+    .hero-sub { font-size: 22px; }
+    .pillars, .apps-grid { grid-template-columns: 1fr; }
+  }
+
+.pillar-links{
+  display:block;
+}
+
+.mini-links-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:14px;
+  margin-top:18px;
+}
+
+.mini-link-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:120px;
+  padding:16px 16px 14px;
+  text-decoration:none;
+  border-radius:18px;
+
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.48), rgba(255,255,255,0.16)),
+    linear-gradient(145deg, var(--panel), var(--panel-2));
+  border:1px solid rgba(255,255,255,0.42);
+  box-shadow:
+    8px 8px 18px rgba(70,70,70,0.10),
+    -6px -6px 12px rgba(255,255,255,0.50),
+    inset 1px 1px 0 rgba(255,255,255,0.50);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.mini-link-card:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    10px 10px 22px rgba(70,70,70,0.12),
+    -7px -7px 14px rgba(255,255,255,0.56),
+    inset 1px 1px 0 rgba(255,255,255,0.55);
+}
+
+.mini-link-title{
+  font-family:'Bebas Neue', sans-serif;
+  font-size:22px;
+  letter-spacing:.08em;
+  color:#20201d;
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.mini-link-text{
+  font-size:11px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+.mini-link-arrow{
+  margin-top:12px;
+  font-size:14px;
+  color:#8d7a4a;
+  align-self:flex-start;
+}
+
+@media (max-width: 900px){
+  .mini-links-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="rivet"></div>
+  <a class="nav-logo" href="#" style="margin-left:12px">NUTEAM.ORG</a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="ed.html">Explore Ed →</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#apps" class="btn-explore">Explore <span class="arr">→</span></a>
+  <div class="nav-corner"><div class="rivet"></div></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-panel">
+    <div>
+      <p class="hero-eyebrow">Built in Reality</p>
+      <h1 class="hero-title">NUTEAM</h1>
+      <p class="hero-sub">The App Universe.</p>
+     <p class="hero-desc">
+An independent base for building offline-first AI tools and
+practical apps — no cloud dependency, no ongoing API cost,
+just software made for real everyday use.
+<br><br>
+Nuteam is where each app is its own small world, and all of
+them share one mindset: build things that actually work.
+</p>
+      <div class="hero-actions">
+        <a href="#apps" class="btn-primary">Explore Apps →</a>
+        <a href="#ed" class="btn-secondary">Enter Ed →</a>
+      </div>
+    </div>
+    <div class="hero-locations">
+      <span>Curation</span>
+      <span>Synthesis</span>
+      <span>Resonance</span>
+      <span>Fluidity</span>
+      <span>Authenticity</span>
+      <span>Interface</span>
+      <span>Legacy</span>
+    </div>
+    <div class="hero-panel-frame"></div>
+  </div>
+</section>
+
+<div class="section-rule">
+  <div class="rivet" style="width:12px;height:12px"></div>
+  <span class="section-rule-label">App Universe</span>
+  <div class="section-rule-line"></div>
+  <div class="rivet" style="width:12px;height:12px"></div>
+</div>
+
+<div class="pillars">
+
+<div class="pillar" onclick="window.location.href='ed.html'">
+  <p class="pillar-num">01</p>
+  <h3 class="pillar-title">THE ED SERIES</h3>
+  <div class="pillar-icon">✦</div>
+ <p class="pillar-desc">
+A family of offline, private AI apps — EdAvatar, EdNote, EdDotSoul
+and more — all built around one idea: local AI that runs
+on-device, with no server and no ongoing cost.
+</p>
+  <span class="pillar-arr">→</span>
+</div>
+
+<div class="pillar pillar-links">
+  <p class="pillar-num">02</p>
+  <h3 class="pillar-title">QUICK LINKS</h3>
+  <p class="pillar-desc">
+    Everything you need to find, download, and follow the Nuteam app universe.
+  </p>
+
+  <div class="mini-links-grid">
+    <a class="mini-link-card" href="https://edavatar-studio.github.io" target="_blank" rel="noopener">
+      <span class="mini-link-title">APP HUB</span>
+      <span class="mini-link-text">Browse and download every app in the Ed Series.</span>
+      <span class="mini-link-arrow">→</span>
+    </a>
+
+    <a class="mini-link-card" href="#epos">
+      <span class="mini-link-title">EPOS OPTIMIZER</span>
+      <span class="mini-link-text">Compress AI prompts to save tokens.</span>
+      <span class="mini-link-arrow">→</span>
+    </a>
+
+    <a class="mini-link-card" href="mailto:wisanunu26@gmail.com?subject=Nuteam%20Feedback">
+      <span class="mini-link-title">FEEDBACK</span>
+      <span class="mini-link-text">Tell us what to build or fix next.</span>
+      <span class="mini-link-arrow">→</span>
+    </a>
+
+    <a class="mini-link-card" href="mailto:wisanunu26@gmail.com?subject=Support%20Nuteam">
+      <span class="mini-link-title">SUPPORT</span>
+      <span class="mini-link-text">Support Nuteam or collaborate.</span>
+      <span class="mini-link-arrow">→</span>
+    </a>
+  </div>
+</div>
+</div>
+
+<section id="apps" class="app-hub">
+  <div class="app-hub-inner">
+
+    <div class="app-hub-text">
+      <p class="app-hub-label">APP HUB</p>
+      <h2 class="app-hub-title">EDAVATAR STUDIO</h2>
+     <p class="app-hub-desc">
+The home of Nuteam’s applications —
+APK tools, experimental systems, and local AI projects.
+<br><br>
+Simple. Direct. Built from real use.
+</p>
+
+      <a href="https://edavatar-studio.github.io" class="app-hub-btn" target="_blank">
+        ENTER STUDIO →
+      </a>
+    </div>
+
+    <div class="apps-grid">
+
+      <div class="app-card">
+        <div class="app-icon"><img src="icon/edreader.jpeg" alt="Ed Reader"></div>
+        <h4 class="app-name">Ed Reader</h4>
+        <p class="app-tagline">Minimalist, ad-free PDF reader built for focus.</p>
+        <span class="app-status active">Available</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon"><img src="icon/nuamp.jpeg" alt="NuAmp Classic"></div>
+        <h4 class="app-name">NuAmp Classic</h4>
+        <p class="app-tagline">Vintage-inspired music player for distraction-free personal listening.</p>
+        <span class="app-status active">Available</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon"><img src="icon/edprompttool.jpeg" alt="Ed Prompt Tool"></div>
+        <h4 class="app-name">Ed Prompt Tool</h4>
+        <p class="app-tagline">Helps craft clearer, stronger image-generation prompts.</p>
+        <span class="app-status future">Coming Soon</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon"><img src="icon/ednote.jpeg" alt="EdNote"></div>
+        <h4 class="app-name">EdNote</h4>
+        <p class="app-tagline">A simple everyday note app for thoughts, plans, and small moments.</p>
+        <span class="app-status active">Available</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon"><img src="icon/eddotsoul.jpeg" alt="EdDotSoul"></div>
+        <h4 class="app-name">EdDotSoul</h4>
+        <p class="app-tagline">Half-tone editing with QR Art — turn artwork into scannable images.</p>
+        <span class="app-status active">Available</span>
+      </div>
+
+      <div class="app-card">
+        <div class="app-icon"><img src="icon/edhalftone.jpeg" alt="EdHalfToneCamera"></div>
+        <h4 class="app-name">EdHalfToneCamera</h4>
+        <p class="app-tagline">Experimental black-and-white halftone camera, live preview.</p>
+        <span class="app-status active">Available</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+  
+<div class="bottom-grid">
+
+<section id="epos" class="bottom-section">
+  <p class="bottom-label">Token Optimizer</p>
+  <h3 class="bottom-title">EPOS Optimizer</h3>
+  <p class="bottom-text">
+    Compress text, images, and PDFs into an ultra-efficient format
+    before sending to any AI — cut token cost without losing content.
+    Built for real, everyday AI use.
+  </p>
+  <div class="bottom-links">
+    <span class="app-status future" style="margin-bottom: 10px;">Coming Soon</span>
+  </div>
+  <a href="epos.html" class="btn-secondary" style="margin-top: 8px;">Read the Story →</a>
+</section>
+
+<section id="ed" class="bottom-section ed-focus">
+    <p class="bottom-label">Local AI</p>
+    <h3 class="bottom-title">Ed is Growing Here</h3>
+   <p class="bottom-text">
+EdAvatar marks the beginning of a local AI direction —
+built to assist, adapt, and grow alongside real users.
+Not a distant system, but a close companion.
+</p>
+    <a href="ed.html"
+    class="btn-secondary"
+    target="_blank"
+    rel="noopener">Explore Ed →</a>
+  </section>
+
+<section id="about" class="bottom-section">
+    <p class="bottom-label">Founder</p>
+    <h3 class="bottom-title">About Nu</h3>
+   <p class="bottom-text">
+Founder of Nuteam. Self-taught developer building an ecosystem
+of offline-first AI tools and independent apps — designed to
+run on-device, respect privacy, and stay free of ongoing cost.
+<br><br>
+Same mindset from day one: build real things that last.
+</p>
+   <a href="mailto:wisanunu26@gmail.com"
+   class="btn-secondary"
+   rel="noopener">Get in Touch →</a>
+  </section>
+</div>
+
+<footer id="contact">
+  <div class="footer-col">
+    <span class="footer-logo">NUTEAM.ORG</span>
+   <p class="footer-tagline">Local AI / Independent Apps / Offline Tools</p>
+    <p class="footer-copy">© 2026 Nuteam. All rights reserved.</p>
+  </div>
+
+  <div class="footer-col">
+    <p class="footer-heading">Connect</p>
+ <div class="social-row">
+  <a href="mailto:wisanunu26@gmail.com" class="social-link">Email</a>
+  <a href="https://www.facebook.com/share/1Hdo5468WM/" class="social-link" target="_blank" rel="noopener">Facebook</a>
+  <a href="https://edavatar-studio.github.io" class="social-link" target="_blank" rel="noopener">GitHub</a>
+</div>
+
+<div class="social-icons">
+  <a href="mailto:wisanunu26@gmail.com" class="sicon" title="Email">📧</a>
+  <a href="https://www.facebook.com/share/1Hdo5468WM/" class="sicon" title="Facebook" target="_blank">F</a>
+  <a href="https://edavatar-studio.github.io" class="sicon" title="GitHub" target="_blank">G</a>
+</div>
+  </div>
+
+  <div class="footer-col">
+    <p class="footer-stay">Stay Updated</p>
+    <p class="footer-stay-sub">New apps, updates, and ideas.</p>
+    <div class="email-row">
+      <input class="email-input" type="email" placeholder="Your email"/>
+      <button class="email-btn">→</button>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
